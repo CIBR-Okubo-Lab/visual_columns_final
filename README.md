@@ -25,7 +25,7 @@ Instead of directly solving the quadratic assignment problem (QAP), we broke dow
 4. Steps 2. and 3. were repeated until no increase in the score was observed (i.e. $\Delta$score is 0 for all the cell types). For our final submission, we used a high value of $\varepsilon=0.95$ making our algorithm very similar to randomly picking a cell type to reassign at each step.
 
 ## Code documentation
-- We used Numpy 1.26.4 and Scipy 1.13.0, but it should work on most versions of Numpy and Scipy. For local swapping in step 1., we used [Julia] 1.10.4 (https://julialang.org/) since we found it to be faster. No special optimization solver is necessary.
+- We used Numpy 1.26.4 and Scipy 1.13.0, but it should work on most versions of Numpy and Scipy. For local swapping in step 1., we used [Julia](https://julialang.org/) 1.10.4  since we found it to be faster. No special optimization solver is necessary.
 - `random_swap.ipynb` is a Jupyter notebook showing the random swapping algorithm we used (step 1). This provided us with a different starting point as the solution provided by the organizer, but it is not necessary. This is an inefficient algorithm that takes long time, and this notebook is mostly kept for the record. 
 - `utils.py` contains utility functions including the function `diff_given_type()` that creates the score matrix and solves the assignment problem (step 2).
 - `demo.ipynb` is a Jupyter notebook that shows how to use the functions in `utils.py` and shows a single step of the algorithm.
