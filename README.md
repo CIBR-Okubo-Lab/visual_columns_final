@@ -12,10 +12,10 @@ We thank the FlyWire organizers at Princeton University for hosting this interes
 ## General approach
 Instead of directly solving the quadratic assignment problem (QAP), we broke down the problem into sub-problems, where each sub-problem was assigning neurons belonging to a single cell type.
 
-1. We choose the baseline solution. We used two options:
-    - [Benchmark solution prepared by the organizers](https://codex.flywire.ai/app/visual_columns_challenge)
-    - We randomly picked two neurons of the same type, swapped their column assignments and if that lead to an increase in the score, we kept the swap.
-2. For each cell type $t$, we calculated the hypothetical increase in the score ($\Delta_t$) as follows:
+1. We prepared the initial solution. We used two options:
+    - Option 1: Directly use the [benchmark solution prepared by the organizers](https://codex.flywire.ai/app/visual_columns_challenge) as the initial solution.
+    - Option 2: We start from the benchmark solution and we randomly picked two neurons of the same type, swapped their column assignments, and if that lead to an increase in the score, we kept the swap. We performed the swap multiple times and used that as the initial solution. 
+2. Given a solution, we calculated the hypothetical increase in the score ($\Delta_t$) for each cell type $t$ as follows:
     - i. We first unassigned all the neurons of a given cell type $t$.
     - ii. We then calculated a score matrix $S$, with rows representing neurons and columns representing visual columns. Entry $S_{ij}$ of this score matrix represents the increase in the score if neuron $i$ was assigned to visual column $j$.
     - iii. Based on this score matrix $S$, we solve a assignment problem to determine the optimal neuron-to-column assignment for this given cell type $t$. This was done using the `linear_sum_assignment` function in [Scipy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html). The increase in the score after this optimal assignment is denoted as $\Delta_t$. Note that at this point, we are only calculating $\Delta_t$, but not performing the actual assignment yet, which will be done in the next step.
